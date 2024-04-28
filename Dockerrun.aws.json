@@ -5,7 +5,6 @@
         "name": "taxchatbotllm-backend",
         "image": "wolvezine24/taxchatbotllm-backend:latest",
         "essential": true,
-        "memory": 128,
         "portMappings": [
           {
             "hostPort": 80,
