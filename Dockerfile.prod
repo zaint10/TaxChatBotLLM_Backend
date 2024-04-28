@@ -9,7 +9,6 @@ ENV PYTHONUNBUFFERED 1
 # create and activate virtual environment
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
-ENV APP_PORT=${PORT:-8000}
 
 
 # set python path
@@ -28,10 +27,13 @@ RUN pip install pip --upgrade && \
 # copy whole project
 COPY . .
 
+# set app port
+ENV APP_PORT=8000
 # apply permission
+
 RUN chmod +x migrate.sh
 RUN chmod +x entrypoint.sh
 
 # run server
 EXPOSE $APP_PORT
-CMD ["sh", "-c", "/app/migrate.sh && /app/entrypoint.sh"]
+CMD ["sh", "-c", "/app/entrypoint.sh && /app/migrate.sh && "]
