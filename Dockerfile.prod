@@ -1,0 +1,38 @@
+# Dockerfile
+FROM python:3.9
+
+# this ensures that the Python interpreter doesn’t generate .pyc files, we don't need them
+ENV PYTHONDONTWRITEBYTECODE 1
+# this will send python output straight to the terminal(standard output) without being buffered
+ENV PYTHONUNBUFFERED 1
+
+# create and activate virtual environment
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV APP_PORT=${PORT:-8000}
+
+
+# set python path
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# set work directory
+RUN APPDIR=/app
+WORKDIR $APPDIR
+
+# copy requirments file
+COPY ./requirements.txt .
+
+# install dependencies
+RUN pip install pip --upgrade && \ 
+    pip install --no-cache-dir -r requirements.txt
+
+# copy whole project
+COPY . .
+
+# apply permission
+RUN chmod +x migrate.sh
+RUN chmod +x entrypoint.sh
+
+# run server
+EXPOSE $APP_PORT
+CMD ["sh", "-c", "/app/migrate.sh && /app/entrypoint.sh"]

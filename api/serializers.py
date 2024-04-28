@@ -16,3 +16,11 @@ class UserSerializer(serializers.ModelSerializer):
         username = email.split('@')[0]  # Extract username from email
         user = User.objects.create_user(username=username, **validated_data)
         return user
+
+
+class PDFUploadSerializer(serializers.Serializer):
+    file = serializers.FileField()
+    
+
+class ChatSerializer(serializers.Serializer):
+    question = serializers.CharField(max_length=255)

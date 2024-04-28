@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from api import auth
+from api import auth, views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', auth.SignupAPIView.as_view()),
     path('login/', auth.LoginAPIView.as_view()),
+    path('upload/', views.W2FormUpload.as_view(), name='w2_form_upload'),
+    path('chat/<int:w2form_id>', views.ChatView.as_view(), name='w2_chat_view'),
 ]

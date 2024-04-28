@@ -1,0 +1,139 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+docker-compose.yml
+Dockerfile
+Dockerfile.prod
+.docker
+
+# Virtual environment
+.venv/
+venv/
+venv
+.env.*
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+**/*.py[cod]
+
+# C extensions
+*.so
+
+# VS Code
+.vscode/# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+.git
+
+.gitignore
