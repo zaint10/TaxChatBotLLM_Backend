@@ -36,4 +36,4 @@ RUN chmod +x entrypoint.sh
 
 # run server
 EXPOSE $APP_PORT
-CMD ["sh", "-c", "/app/entrypoint.sh && /app/migrate.sh && "]
+CMD ["sh", "-c", "/app/entrypoint.sh && /app/migrate.sh "]
