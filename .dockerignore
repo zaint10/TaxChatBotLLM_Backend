@@ -8,11 +8,16 @@ docker-compose.yml
 Dockerfile
 Dockerfile.prod
 .docker
+Dockerrun.aws.json
+
+#AWS
+.elasticbeanstalk
 
 # Virtual environment
 .venv/
 venv/
 venv
+.env
 .env.*
 # Byte-compiled / optimized / DLL files
 **/__pycache__/
@@ -22,7 +27,7 @@ venv
 *.so
 
 # VS Code
-.vscode/# Elastic Beanstalk Files
+.vscode
 
 .elasticbeanstalk/*
 

@@ -7,9 +7,6 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # this will send python output straight to the terminal(standard output) without being buffered
 ENV PYTHONUNBUFFERED 1
 
-# set app dir env
-ENV APPDIR=/app
-
 # create and activate virtual environment
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
@@ -18,7 +15,7 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # set work directory
-WORKDIR $APPDIR
+WORKDIR /app
 
 # copy requirments file
 COPY ./requirements.txt .

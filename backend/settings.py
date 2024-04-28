@@ -29,7 +29,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["taxchatbotllm-backend-uojupodita-an.a.run.app", "https://taxchatbotllm-backend-uojupodita-an.a.run.app"]
+ALLOWED_HOSTS = ["taxchatbotllm.ap-northeast-1.elasticbeanstalk.com/",]
 
 if DEBUG:
     ALLOWED_HOSTS.append("localhost")
