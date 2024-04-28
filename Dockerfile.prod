@@ -31,8 +31,8 @@ COPY . .
 ENV APP_PORT=8000
 # apply permission
 
-RUN chmod +x migrate.sh
-RUN chmod +x entrypoint.sh
+RUN chmod +x /app/migrate.sh
+RUN chmod +x /app/entrypoint.sh
 
 # run server
 EXPOSE $APP_PORT

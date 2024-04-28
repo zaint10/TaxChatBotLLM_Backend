@@ -7,15 +7,15 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # this will send python output straight to the terminal(standard output) without being buffered
 ENV PYTHONUNBUFFERED 1
 
+# set work directory
+WORKDIR /app
+
 # create and activate virtual environment
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 
 # set python path
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-# set work directory
-WORKDIR /app
 
 # copy requirments file
 COPY ./requirements.txt .
@@ -31,7 +31,7 @@ COPY . .
 ENV APP_PORT=8000
 
 # run server
-RUN chmod +x entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # expose host
 EXPOSE $APP_PORT
