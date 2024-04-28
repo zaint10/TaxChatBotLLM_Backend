@@ -1,18 +1,13 @@
 {
-    "AWSEBDockerrunVersion": "2",
-    "containerDefinitions": [
-      {
-        "name": "taxchatbotllm-backend",
-        "image": "wolvezine24/taxchatbotllm-backend:latest",
-        "essential": true,
-        "memory": 128,
-        "portMappings": [
-          {
-            "hostPort": 80,
-            "containerPort": 8000
-          }
-        ]
-      }
-    ]
-  }
-  
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "wolvezine24/taxchatbotllm-backend:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "HostPort": 80,
+      "ContainerPort": 8000
+    }
+  ]
+}
