@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 
+# Create your models here.
 class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     
@@ -9,11 +10,10 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ["username"]
 
 
-# Create your models here.
+def empty_list():
+        return '[]'
+
 class W2Form(models.Model):
-    def empty_list(self):
-        return []
-    
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     file_name = models.CharField(blank=False, null=True)
     data = models.TextField(blank=True, null=True)
@@ -21,4 +21,5 @@ class W2Form(models.Model):
 
     def __str__(self):
         return f"W2Form for {self.user.username}"
-    
+
+

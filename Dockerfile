@@ -17,10 +17,16 @@ RUN python3 -m venv $VIRTUAL_ENV
 # set python path
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        poppler-utils
+
 # copy requirments file
 COPY ./requirements.txt .
 
-# install dependencies
+# install project dependencies
 RUN pip install pip --upgrade && \ 
     pip install --no-cache-dir -r requirements.txt
 
