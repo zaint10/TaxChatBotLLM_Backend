@@ -1,13 +1,34 @@
 {
-  "AWSEBDockerrunVersion": "1",
-  "Image": {
-    "Name": "wolvezine24/taxchatbotllm-backend:latest",
-    "Update": "true"
+  "AWSEBDockerrunVersion": "2",
+  "containerDefintions": [{
+    "name": "taxchatbotllm",
+    "image": "wolvezine24/taxchatbotllm:latest",
+    "essential": true,
+    "memory": 100,
+    "portMappings": [{
+      "containerPort": 8080,
+      "hostPort": 80
+    }],
+    "links": ["db"]
   },
-  "Ports": [
-    {
-      "HostPort": 80,
-      "ContainerPort": 8000
+  {
+    "name": "db",
+    "image": "postgres",
+    "essential": true,
+    "memory": 100,
+    "mountPoints": [{
+      "containerPath": "/var/lib/postgresql/data",
+      "sourceVolume": "postgres_data"
+    }],
+    "portMappings":[{
+      "containerPort": 5432,
+      "hostPort": 5432
+    }]
+  }],
+  "volumns": [{
+    "name": "postgres_data",
+    "host": {
+      "sourcePath": "postgres_data"
     }
-  ]
+  }]
 }
