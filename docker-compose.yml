@@ -2,9 +2,10 @@ services:
   backend:
     build:
       context: ./
+    image: taxchatbotllm
     ports:
       - "8000:8000"
-    command: sh -c "chmod +x /app/migrate.sh && sh /app/migrate.sh && sh /app/entrypoint.sh"
+    command: sh -c "chmod +x migrate.sh && sh ./migrate.sh && sh ./entrypoint.sh"
     volumes:
       - ./:/app
     env_file:

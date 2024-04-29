@@ -30,10 +30,10 @@ COPY . .
 # set app port
 ENV APP_PORT=8000
 
-# run server
-RUN chmod +x /app/entrypoint.sh
+# Make scripts executable
+RUN chmod +x migrate.sh entrypoint.sh
 
 # expose host
 EXPOSE $APP_PORT
 
-CMD ["/app/entrypoint.sh"]
+CMD ["sh", "-c", "./migrate.sh && ./entrypoint.sh "]
