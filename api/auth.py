@@ -36,7 +36,6 @@ class LoginAPIView(APIView):
             password = serializer.validated_data.get('password')
             
             user = authenticate(request, email=email, password=password)
-            
             if user is not None:
                 login(request, user)
                 refresh = RefreshToken.for_user(user)
@@ -45,7 +44,7 @@ class LoginAPIView(APIView):
                     'access': str(refresh.access_token),
                 }, status=status.HTTP_200_OK)
             
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Please check your credentials (Email or password)'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
