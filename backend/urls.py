@@ -22,15 +22,17 @@ from api import auth, views
 from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
-router.register(r'w2form', views.W2FormViewSet)
+router.register(r'', views.W2FormViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', auth.SignupAPIView.as_view()),
     path('login/', auth.LoginAPIView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('get-qr-code/', auth.QRCodeAPIView.as_view(), name='get_qr_code'),
+    path('verify-qr-code-otp/', auth.OTPVerificationAPIView.as_view(), name='verify_qr_code_otp/'),
     path('upload/', views.W2FormUpload.as_view(), name='w2_form_upload'),
     path('chat/<int:w2form_id>', views.ChatView.as_view(), name='w2_chat_view'),
-    path('', include(router.urls)),
-
+    path('w2form/', include(router.urls)),
+    path('w2form/<int:w2form_id>/sensitive-info/', views.W2FormSensitiveInfoAPIView.as_view(), name='w2form-sensitive-info'),
 ]

@@ -14,9 +14,9 @@ def parse_pdf(pdf_file):
         extracted_text = extract_text_from_images(images)
 
         # Parse extracted text to get W-2 data
-        # w2_data = parse_extracted_text(extracted_text)
+        extracted_text, extracted_data = parse_extracted_text(extracted_text)
         
-        return extracted_text
+        return extracted_text, extracted_data
     except Exception as e:
         raise e
 
@@ -42,6 +42,7 @@ def parse_extracted_text(extracted_text):
     employee_ssn_match = re.search(r"Employee.* Social Security Number:\s*(.*)", extracted_text, re.IGNORECASE)
     if employee_ssn_match:
         extracted_data['employee_ssn'] = employee_ssn_match.group(1)
+        extracted_text = re.sub(re.escape(extracted_data['employee_ssn']), "XXXXXXXX", extracted_text)
 
     employee_name_match = re.search(r"Employee.* Name:\s*(.*)", extracted_text, re.IGNORECASE)
     if employee_name_match:
@@ -103,7 +104,7 @@ def parse_extracted_text(extracted_text):
     if control_number_match:
         extracted_data['control_number'] = control_number_match.group(1)
 
-    return extracted_data
+    return extracted_text, extracted_data
 
 def save_uploaded_file(pdf_file, username):
     # Define directory path to store files

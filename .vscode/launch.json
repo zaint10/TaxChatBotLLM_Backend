@@ -15,7 +15,7 @@
             "django": true,
             "autoStartBrowser": false,
             "console": "integratedTerminal",
-            "justMyCode": true
+            "justMyCode": false
         }
     ]
 }

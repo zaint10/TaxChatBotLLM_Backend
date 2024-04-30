@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
 import environ
 
 env = environ.Env()
@@ -35,6 +36,11 @@ CORS_ORIGIN_WHITELIST = ["https://taxchatbot.netlify.app"]
 if DEBUG:
     ALLOWED_HOSTS.append("localhost")
     CORS_ORIGIN_WHITELIST.append('http://localhost:3000')
+
+CORS_ALLOW_HEADERS = (
+    *default_headers,
+    "X-OTP",
+)
 
 # Application definition
 
