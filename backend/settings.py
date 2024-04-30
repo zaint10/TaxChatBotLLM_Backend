@@ -30,7 +30,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG", default=True)
 
 ALLOWED_HOSTS = ["taxchatbot.ap-northeast-1.elasticbeanstalk.com", "taxchatbot.netlify.app"]
-CORS_ORIGIN_WHITELIST = ["https://taxchatbot.netlify.app/"]
+CORS_ORIGIN_WHITELIST = ["https://taxchatbot.netlify.app"]
 
 if DEBUG:
     ALLOWED_HOSTS.append("localhost")
