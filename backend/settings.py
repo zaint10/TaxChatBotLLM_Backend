@@ -29,10 +29,12 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["taxchatbot.ap-northeast-1.elasticbeanstalk.com",]
+ALLOWED_HOSTS = ["taxchatbot.ap-northeast-1.elasticbeanstalk.com"]
+CORS_ORIGIN_WHITELIST = []
 
 if DEBUG:
     ALLOWED_HOSTS.append("localhost")
+    CORS_ORIGIN_WHITELIST.append('http://localhost:3000')
 
 # Application definition
 
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -1,14 +1,20 @@
 import json
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 
 from api.pdf_parser import parse_pdf, save_uploaded_file
-from api.serializers import PDFUploadSerializer, ChatSerializer
+from api.serializers import PDFUploadSerializer, ChatSerializer, W2FormSerializer
 from api.models import W2Form
 from llms.openai_client import ChatHandler
 # Create your views here.
+
+class W2FormViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = W2Form.objects.all()
+    serializer_class = W2FormSerializer
+    
 class W2FormUpload(APIView):
     serializer_class = PDFUploadSerializer
     

@@ -1,7 +1,16 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
+from api.models import W2Form
+
 User = get_user_model()
+
+class W2FormSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = W2Form
+        fields = ('id', 'file_name', 'data')
+
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
