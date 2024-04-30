@@ -29,8 +29,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["taxchatbot.ap-northeast-1.elasticbeanstalk.com"]
-CORS_ORIGIN_WHITELIST = []
+ALLOWED_HOSTS = ["taxchatbot.ap-northeast-1.elasticbeanstalk.com", "taxchatbot.netlify.app"]
+CORS_ORIGIN_WHITELIST = ["https://taxchatbot.netlify.app/"]
 
 if DEBUG:
     ALLOWED_HOSTS.append("localhost")
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'api'
 ]
 
