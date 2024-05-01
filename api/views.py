@@ -30,7 +30,9 @@ class W2FormUpload(APIView):
             obj_w2form = W2Form.objects.create(user=request.user, 
                                                file_name=uploaded_file.name, 
                                                data=extracted_text, 
-                                               employee_ssn=extracted_data['employee_ssn'])
+                                               )
+            obj_w2form.encrypt_ssn(extracted_data['employee_ssn'])
+            obj_w2form.save()
             
             return Response({
                 "message": "W-2 form parsed and saved successfully", 
