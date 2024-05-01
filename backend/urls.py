@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', auth.SignupAPIView.as_view()),
     path('login/', auth.LoginAPIView.as_view()),
+    path('users/me', auth.CurrentUserAPIView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('get-qr-code/', auth.QRCodeAPIView.as_view(), name='get_qr_code'),
     path('verify-qr-code-otp/', auth.OTPVerificationAPIView.as_view(), name='verify_qr_code_otp/'),

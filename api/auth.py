@@ -54,7 +54,14 @@ class LoginAPIView(APIView):
             return Response({'error': 'Please check your credentials (Email or password)'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
+class CurrentUserAPIView(APIView):
+    def get(self, request):
+        refresh = RefreshToken.for_user(request.user)
+        return Response({
+            'refresh': str(refresh), 
+            'access': str(refresh.access_token),
+            'user': ListUserSerializer(request.user).data})
         
 class QRCodeAPIView(APIView):
     def get(self, request):
@@ -151,7 +158,8 @@ class OTPVerificationAPIView(APIView):
             if not request.user.is_2fa_enabled:
                 request.user.is_2fa_enabled = True
                 request.user.save()
-            
+            request.user.otp_retry_count = 0
+            request.user.save()
             return Response({'message': 'OTP verification successful'})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

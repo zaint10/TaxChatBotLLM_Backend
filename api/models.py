@@ -42,17 +42,17 @@ class W2Form(models.Model):
     messages = models.JSONField(blank=True, default=empty_list)
     employee_ssn = models.BinaryField(null=True, blank=True)
         
-    def encrypt_ssn(self):
-        if self.employee_ssn:
+    def encrypt_ssn(self, employee_ssn):
+        if employee_ssn:
             key = os.environ.get("ENCRYPTION_KEY").encode()
             cipher_suite = Fernet(key)
-            encrypted_ssn = cipher_suite.encrypt(self.employee_ssn.encode())
+            encrypted_ssn = cipher_suite.encrypt(employee_ssn.encode())
             self.employee_ssn = encrypted_ssn
         return None
     
     @property
-    def decrypted_ssn(self, employee_ssn):
-        if employee_ssn:
+    def decrypted_ssn(self):
+        if self.employee_ssn:
             key = os.environ.get("ENCRYPTION_KEY").encode()
             cipher_suite = Fernet(key)
             decrypted_ssn = cipher_suite.decrypt(bytes(self.employee_ssn)).decode()

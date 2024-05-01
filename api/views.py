@@ -10,11 +10,14 @@ from api.serializers import PDFUploadSerializer, ChatSerializer, W2FormSerialize
 from api.models import W2Form
 from middlewares import require_2fa
 from llms.openai_client import ChatHandler
+from filters import UserRestrictedFilterBackend
+
 # Create your views here.
 
 class W2FormViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = W2Form.objects.all()
     serializer_class = W2FormSerializer
+    filter_backends = [UserRestrictedFilterBackend]
     
 class W2FormUpload(APIView):
     serializer_class = PDFUploadSerializer
@@ -27,10 +30,8 @@ class W2FormUpload(APIView):
             uploaded_file = serializer.validated_data['file']
             file_path = save_uploaded_file(uploaded_file, request.user.username)
             extracted_text, extracted_data = parse_pdf(file_path)
-            obj_w2form = W2Form.objects.create(user=request.user, 
-                                               file_name=uploaded_file.name, 
-                                               data=extracted_text, 
-                                               )
+            # Create the W2Form object with the necessary data
+            obj_w2form = W2Form(user=request.user, file_name=uploaded_file.name, data=extracted_text)
             obj_w2form.encrypt_ssn(extracted_data['employee_ssn'])
             obj_w2form.save()
             
