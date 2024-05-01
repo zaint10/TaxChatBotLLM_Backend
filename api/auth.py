@@ -1,8 +1,7 @@
 import pyotp
 import base64
 from django.utils import timezone
-from datetime import datetime, timedelta
-from django.http import HttpResponse
+from datetime import timedelta
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -75,39 +74,6 @@ class QRCodeAPIView(APIView):
         
         # Generate provisioning URI for QR code
         provisioning_uri = totp.provisioning_uri(request.user.email, issuer_name='TaxChatBotLLM')
-        
-        # Generate QR code
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        qr.add_data(provisioning_uri)
-        qr.make(fit=True)
-        
-        # Create a BytesIO object to store the QR code image
-        qr_code_image = BytesIO()
-        qr.make_image().save(qr_code_image, format='PNG')
-        
-        # Base64 encode the image data
-        qr_code_image_base64 = base64.b64encode(qr_code_image.getvalue()).decode('utf-8')
-        
-        # Construct the HTML response with the QR code image
-        html_response = f'''
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>QR Code</title>
-        </head>
-        <body>
-            <h1>Scan QR Code</h1>
-            <img src="data:image/png;base64,{qr_code_image_base64}" alt="QR Code">
-        </body>
-        </html>
-        '''
         
         # Return the HTML response
         return Response({"qr_code_value": provisioning_uri})
