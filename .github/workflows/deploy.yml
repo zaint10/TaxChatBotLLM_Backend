@@ -3,7 +3,7 @@ name: Create Docker Image, Push to Docker Hub and Deploy to AWS EBS
 on:
   push:
     branches:
-      - main
+      - master
 env:
     DOCKER_IMAGE_NAME: wolvezine24/taxchatbotllm
     DOCKER_IMAGE_TAG: production
@@ -44,3 +44,4 @@ jobs:
         environment_name: ${{ AWS_EB_ENVIRONMENT_NAME }}
         version_label: production-${{ github.sha }}
         deployment_package: deploy.zip
+      if: github.ref == 'refs/heads/master'
