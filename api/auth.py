@@ -129,3 +129,4 @@ class OTPVerificationAPIView(APIView):
             return Response({'message': 'OTP verification successful'})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
