@@ -34,14 +34,26 @@ jobs:
     - name: Generate deployment package
       run: zip -r deploy.zip Dockerrun.aws.json -x '*.git*'
 
-    - name: Deploy to AWS Elastic Beanstalk
+    - name: Deploy to AWS Elastic Beanstalk (Re-Deploy same version)
       uses: einaregilsson/beanstalk-deploy@v22
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        region: ap-northeast-1
         application_name: ${{ env.AWS_EB_APPLICATION_NAME }}
         environment_name: ${{ env.AWS_EB_ENVIRONMENT_NAME }}
         version_label: production-${{ github.sha }}
+        region: ${{ env.AWS_REGION }}
+        use_existing_version_if_available: true
+      if: github.ref == 'refs/heads/master' && github.event_name != 'workflow_run'
+    
+    - name: Deploy to AWS Elastic Beanstalk (New Version)
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: ${{ env.AWS_EB_APPLICATION_NAME }}
+        environment_name: ${{ env.AWS_EB_ENVIRONMENT_NAME }}
+        version_label: production-${{ github.sha }}
+        region: ${{ env.AWS_REGION }}
         deployment_package: deploy.zip
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/master' && github.event_name == 'workflow_run'
