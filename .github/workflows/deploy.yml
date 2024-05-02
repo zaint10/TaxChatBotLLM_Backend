@@ -8,7 +8,7 @@ env:
     DOCKER_IMAGE_NAME: wolvezine24/taxchatbotllm
     DOCKER_IMAGE_TAG: production
     AWS_EB_APPLICATION_NAME: taxchatbotlm
-    AWS_EB_ENVIRONMENT_NAME: Taxchatbotlm-env
+    AWS_EB_ENVIRONMENT_NAME: Taxchatbotlm-env-2
 
 jobs:
   build_and_deploy:
@@ -45,7 +45,7 @@ jobs:
         application_name: ${{ env.AWS_EB_APPLICATION_NAME }}
         environment_name: ${{ env.AWS_EB_ENVIRONMENT_NAME }}
         version_label: production-${{ github.sha }}
-        region: 'ap-northeast-1'
+        region: ap-northeast-1
         deployment_package: deploy.zip
       if: github.ref == 'refs/heads/master' && github.event_name != 'workflow_run'
     
@@ -57,6 +57,6 @@ jobs:
         application_name: ${{ env.AWS_EB_APPLICATION_NAME }}
         environment_name: ${{ env.AWS_EB_ENVIRONMENT_NAME }}
         version_label: production-${{ github.sha }}
-        region: 'ap-northeast-1'
+        region: ap-northeast-1
         use_existing_version_if_available: true
       if: github.ref == 'refs/heads/master' && github.event_name == 'workflow_run'

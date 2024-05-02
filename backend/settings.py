@@ -30,11 +30,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["taxchatbot.ap-northeast-1.elasticbeanstalk.com", "taxchatbotfrontend.s3-website-ap-northeast-1.amazonaws.com"]
+ALLOWED_HOSTS = [env("APP_HOST"), "taxchatbotfrontend.s3-website-ap-northeast-1.amazonaws.com"]
 CORS_ORIGIN_WHITELIST = ["http://taxchatbotfrontend.s3-website-ap-northeast-1.amazonaws.com",]
 
 if DEBUG:
-    ALLOWED_HOSTS.append("localhost")
     CORS_ORIGIN_WHITELIST.append('http://localhost:3000')
 
 CORS_ALLOW_HEADERS = (
