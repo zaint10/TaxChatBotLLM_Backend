@@ -46,7 +46,7 @@ jobs:
         environment_name: ${{ env.AWS_EB_ENVIRONMENT_NAME }}
         version_label: production-${{ github.sha }}
         region: ${{ env.AWS_REGION }}
-        use_existing_version_if_available: true
+        deployment_package: deploy.zip
       if: github.ref == 'refs/heads/master' && github.event_name != 'workflow_run'
     
     - name: Deploy to AWS Elastic Beanstalk (New Version)
@@ -58,5 +58,5 @@ jobs:
         environment_name: ${{ env.AWS_EB_ENVIRONMENT_NAME }}
         version_label: production-${{ github.sha }}
         region: ${{ env.AWS_REGION }}
-        deployment_package: deploy.zip
+        use_existing_version_if_available: true
       if: github.ref == 'refs/heads/master' && github.event_name == 'workflow_run'
